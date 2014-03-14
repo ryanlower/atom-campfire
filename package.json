@@ -3,7 +3,7 @@
   "main": "./lib/campfire",
   "version": "0.0.1",
   "private": true,
-  "description": "A short description of your package",
+  "description": "Atom campfire client package",
   "repository": "https://github.com/ryanlower/atom-campfire",
   "license": "MIT",
   "engines": {
