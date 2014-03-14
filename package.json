@@ -1,0 +1,16 @@
+{
+  "name": "campfire",
+  "main": "./lib/campfire",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A short description of your package",
+  "repository": "https://github.com/ryanlower/atom-campfire",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "campfire": ">= 0.2.0",
+    "underscore-plus": "1.x"
+  }
+}

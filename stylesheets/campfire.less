@@ -1,0 +1,44 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.campfire {
+  color: @text-color;
+  background-color: @base-background-color;
+
+  .messages {
+    position: absolute;
+    top: 0px;
+    bottom: 35px;
+    overflow: auto;
+    width: 100%;
+
+    .message {
+      margin: 5px;
+      padding: 5px;
+      background-color: @pane-item-background-color;
+      border: 1px solid @pane-item-border-color;
+      border-radius: @component-border-radius;
+      .user {
+        color: @text-color-highlight;
+      }
+    }
+  }
+
+  .new-message-container {
+    background-color: white;
+    position: absolute;
+    bottom: 0px;
+    height: 35px;
+    width: 100%;
+    padding: 5px;
+    input[type=text] {
+      width: 90%;
+    }
+    .btn {
+      width: 10%;
+    }
+  }
+}

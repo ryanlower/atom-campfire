@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable campfire': 'campfire:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'campfire'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'campfire:toggle' }
+      ]
+    ]
+  }
+]
