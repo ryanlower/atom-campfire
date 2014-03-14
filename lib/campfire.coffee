@@ -16,13 +16,15 @@ module.exports =
       token: atom.config.get 'campfire.token'
       account: atom.config.get 'campfire.account'
 
+    @campfire.me (error, me) =>
+      @campfire.user = me.user
+
     @campfire.join atom.config.get('campfire.room'), (error, room) =>
       @room = new Room(room)
       @campfireView.setRoom @room
 
     atom.project.registerOpener (filePath) =>
       if filePath == 'campfire://room'
-        console.log 'show campfireView'
         @campfireView
 
     # atom.workspaceView.command 'campfire:show', =>

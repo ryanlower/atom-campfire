@@ -17,26 +17,28 @@
 
     .message-group {
       margin: 5px;
-      padding: 5px;
 
       background-color: @pane-item-background-color;
       border: 1px solid @pane-item-border-color;
       border-radius: @component-border-radius;
 
+      &.self {
+        background-color: @background-color-highlight;
+      }
+
       .user {
         color: @text-color-highlight;
+        margin: 5px;
       }
       .timestamp {
         float: right;
+        margin: 5px;
       }
-      .message {
-        padding-top: 5px;
-        margin-top: 5px;
+      .message .body {
+        padding: 5px;
         border-top: 1px solid lightGray;
-        .body {
-          &.paste {
-            font-style: italic;
-          }
+        &.paste {
+          font-style: italic;
         }
       }
     }

@@ -27,5 +27,9 @@ class Room extends Emitter
     @room.listen (message) => @addMessages message
 
   _addMessage: (message) ->
+    if message.userId == @room.campfire.user.id
+      # Mark message as being by the current user
+      message.bySelf = true
+
     @messages.push message
     @emit 'new_message', message

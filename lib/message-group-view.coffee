@@ -14,6 +14,10 @@ class MessageGroupView extends View
   initialize: (@group) ->
     @user.html @group.user.name
     @timestamp.html @group.firstMessage().createdAt
+
+    if @group.firstMessage().bySelf?
+      @.addClass 'self'
+
     @_addMessage @group.firstMessage()
 
     @subscribe @group, 'new_message', (message) =>
