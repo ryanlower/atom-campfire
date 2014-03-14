@@ -1,3 +1,4 @@
+autolinks = require 'autolinks'
 emoji = require 'emoji-images'
 
 {$, View} = require 'atom'
@@ -9,12 +10,18 @@ class MessageView extends View
       @div outlet: 'body', class: 'body'
 
   initialize: (user, @message) ->
-    @body.html @emojified_body()
+    @body.html @processed_body()
 
     if @message.type == 'PasteMessage'
       @body.addClass 'paste'
     if @message.mentionsSelf? && !@message.bySelf?
       @body.addClass 'mention'
 
-  emojified_body: ->
-    emoji @message.body, 'atom://campfire/node_modules/emoji-images/pngs'
+  processed_body: ->
+    @_autolinked @_emojified @message.body
+
+  _emojified: (body) ->
+    emoji body, 'atom://campfire/node_modules/emoji-images/pngs'
+
+  _autolinked: (body) ->
+    autolinks body

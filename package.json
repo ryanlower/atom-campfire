@@ -10,6 +10,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "autolinks": ">= 0.0.1",
     "campfire": ">= 0.2.0",
     "emissary": ">= 1.1.0",
     "emoji-images": ">= 0.1.0",
