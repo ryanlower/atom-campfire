@@ -31,5 +31,8 @@ class Room extends Emitter
       # Mark message as being by the current user
       message.bySelf = true
 
+    if message.body && message.body.indexOf(@room.campfire.user.name) != -1
+      message.mentionsSelf = true
+
     @messages.push message
     @emit 'new_message', message

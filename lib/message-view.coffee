@@ -10,3 +10,5 @@ class MessageView extends View
     @body.html message.body
     if message.type == 'PasteMessage'
       @body.addClass 'paste'
+    if message.mentionsSelf? && !message.bySelf?
+      @body.addClass 'mention'
