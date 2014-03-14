@@ -34,13 +34,12 @@ class RoomView extends View
         # The last message was by the same user
         # So add this message to the previous group
         group = @lastGroup
+        group.addMessage message
       else
         # New user, so new message group
-        group = new MessageGroup(user)
+        group = new MessageGroup(user, message)
         group_view = new MessageGroupView(group)
         group_view.appendTo @messages
-
-      group.addMessage message
 
       # Remember this group for the next message
       @lastGroup = group
