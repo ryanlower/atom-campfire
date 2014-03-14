@@ -38,6 +38,8 @@ class CampfireView extends View
       group_view = new MessageGroupView(group)
       group_view.appendTo @messages
 
+      @messages.scrollTop @messages.prop('scrollHeight')
+
   _getUser: (userId) ->
     _.findWhere @room.users, id: userId
 
