@@ -12,6 +12,7 @@
   "dependencies": {
     "campfire": ">= 0.2.0",
     "emissary": ">= 1.1.0",
+    "emoji-images": ">= 0.1.0",
     "underscore-plus": "1.x"
   }
 }
