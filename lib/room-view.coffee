@@ -9,15 +9,20 @@ class RoomView extends View
     @div class: 'room', =>
       @div outlet: 'room_info', class: 'overlay from-top'
       @div outlet: 'messages', class: 'messages block'
-      @div class: 'new-message-container block', =>
-        @input outlet: 'new_message', type: 'text'
-        @button outlet: 'send_button', class: 'btn', 'Send'
+      @div class: 'new-message-container', =>
+        @input outlet: 'new_message', type: 'text', class: 'native-key-bindings'
 
   initialize: (@room) ->
+    # Listen for new message events on the Room
     @subscribe @room, 'new_message', (message) =>
       @_addMessage message
       @_scrollToLatestMessage()
-    @send_button.on 'click', => @_sendMessage()
+
+    # Listen for enter in new message input
+    @new_message.on 'keydown', (e) =>
+      if e.keyCode == 13 && @new_message.val()
+        @_sendMessage()
+
     @room_info.html @room.room.name
 
   _addMessage: (message) ->
