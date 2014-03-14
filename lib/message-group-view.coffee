@@ -12,7 +12,7 @@ class MessageGroupView extends View
 
   initialize: (group) ->
     @user.html group.user.name
-    _.each group.messages, (message) =>
+
+    @subscribe group, 'new_message', (message) =>
       message_view = new MessageView(group.user, message)
       message_view.appendTo @body
-

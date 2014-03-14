@@ -18,18 +18,27 @@ class RoomView extends View
       @_addMessage message
       @_scrollToLatestMessage()
     @send_button.on 'click', => @_sendMessage()
-    @room_info.html @room.name
+    @room_info.html @room.room.name
 
   _addMessage: (message) ->
     # Only show text and paste messages for now
     if message.type == 'TextMessage' or message.type == 'PasteMessage'
       user = @room.getUser message.userId
 
-      group = new MessageGroup(user)
+      if @lastGroup?.addMessageToGroup message
+        # The last message was by the same user
+        # So add this message to the previous group
+        group = @lastGroup
+      else
+        # New user, so new message group
+        group = new MessageGroup(user)
+        group_view = new MessageGroupView(group)
+        group_view.appendTo @messages
+
       group.addMessage message
 
-      group_view = new MessageGroupView(group)
-      group_view.appendTo @messages
+      # Remember this group for the next message
+      @lastGroup = group
 
   _scrollToLatestMessage: ->
     @messages.scrollTop @messages.prop('scrollHeight')
