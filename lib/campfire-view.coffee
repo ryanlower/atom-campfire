@@ -1,6 +1,8 @@
 _ = require 'underscore-plus'
 {$, View} = require 'atom'
 
+MessageGroup = require './message-group'
+MessageGroupView = require './message-group-view'
 MessageView = require './message-view'
 
 module.exports =
@@ -8,7 +10,7 @@ class CampfireView extends View
   @content: ->
     @div class: 'campfire', =>
       @div outlet: 'room_info', class: 'overlay from-top'
-      @div outlet: 'messages', class: 'messages padded block'
+      @div outlet: 'messages', class: 'messages block'
       @div class: 'new-message-container block', =>
         @input outlet: 'new_message', type: 'text'
         @button outlet: 'send_button', class: 'btn', 'Send'
@@ -16,8 +18,7 @@ class CampfireView extends View
   initialize: ->
     @send_button.on 'click', => @_sendMessage()
 
-  setRoom: (room) ->
-    @room = room
+  setRoom: (@room) ->
     @room_info.html @room.name
 
   addMessages: (messages) ->
@@ -30,8 +31,12 @@ class CampfireView extends View
     # Only show text messages for now
     if message.type == 'TextMessage'
       user = @_getUser message.userId
-      message_view = new MessageView(user, message)
-      message_view.appendTo @messages
+
+      group = new MessageGroup(user)
+      group.addMessage message
+
+      group_view = new MessageGroupView(group)
+      group_view.appendTo @messages
 
   _getUser: (userId) ->
     _.findWhere @room.users, id: userId
