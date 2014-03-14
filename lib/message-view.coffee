@@ -6,16 +6,15 @@ emoji = require 'emoji-images'
 module.exports =
 class MessageView extends View
   @content: ->
-    @div class: 'message', =>
-      @div outlet: 'body', class: 'body'
+    @div class: 'message'
 
   initialize: (user, @message) ->
-    @body.html @processed_body()
+    @html @processed_body()
 
     if @message.type == 'PasteMessage'
-      @body.addClass 'paste'
+      @addClass 'paste'
     if @message.mentionsSelf? && !@message.bySelf?
-      @body.addClass 'mention'
+      @addClass 'mention'
 
   processed_body: ->
     @_autolinked @_emojified @message.body
