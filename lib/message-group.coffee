@@ -1,5 +1,3 @@
-{View} = require 'atom'
-
 module.exports =
 class MessageGroup
   constructor: (@user) ->
@@ -7,4 +5,3 @@ class MessageGroup
 
   addMessage: (message) ->
     @messages.push message
-

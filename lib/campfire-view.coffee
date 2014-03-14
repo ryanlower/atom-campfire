@@ -1,49 +1,13 @@
-_ = require 'underscore-plus'
 {$, View} = require 'atom'
 
-MessageGroup = require './message-group'
-MessageGroupView = require './message-group-view'
-MessageView = require './message-view'
+RoomView = require './room-view'
 
 module.exports =
 class CampfireView extends View
   @content: ->
     @div class: 'campfire', =>
-      @div outlet: 'room_info', class: 'overlay from-top'
-      @div outlet: 'messages', class: 'messages block'
-      @div class: 'new-message-container block', =>
-        @input outlet: 'new_message', type: 'text'
-        @button outlet: 'send_button', class: 'btn', 'Send'
-
-  initialize: ->
-    @send_button.on 'click', => @_sendMessage()
+      @div outlet: 'room_container'
 
   setRoom: (@room) ->
-    @room_info.html @room.name
-
-  addMessages: (messages) ->
-    if _.isArray messages
-      _.each messages, (message) => @_addMessage message
-    else
-      @_addMessage messages
-
-  _addMessage: (message) ->
-    # Only show text messages for now
-    if message.type == 'TextMessage'
-      user = @_getUser message.userId
-
-      group = new MessageGroup(user)
-      group.addMessage message
-
-      group_view = new MessageGroupView(group)
-      group_view.appendTo @messages
-
-      @messages.scrollTop @messages.prop('scrollHeight')
-
-  _getUser: (userId) ->
-    _.findWhere @room.users, id: userId
-
-  _sendMessage: ->
-    msg = @new_message.val()
-    @new_message.val ''
-    @room.speak msg
+    @room_view = new RoomView(@room)
+    @room_view.appendTo @room_container

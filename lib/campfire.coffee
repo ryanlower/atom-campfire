@@ -2,6 +2,7 @@ url = require 'url'
 Campfire = require('campfire').Campfire
 
 CampfireView = require './campfire-view'
+Room = require './room'
 
 module.exports =
   campfireView: null
@@ -16,16 +17,12 @@ module.exports =
       account: atom.config.get 'campfire.account'
 
     @campfire.join atom.config.get('campfire.room'), (error, room) =>
-      @campfireView.setRoom room
-
-      room.messages (error, messages) =>
-        @campfireView.addMessages messages
-
-      room.listen (message) =>
-        @campfireView.addMessages message
+      @room = new Room(room)
+      @campfireView.setRoom @room
 
     atom.project.registerOpener (filePath) =>
       if filePath == 'campfire://room'
+        console.log 'show campfireView'
         @campfireView
 
     # atom.workspaceView.command 'campfire:show', =>
