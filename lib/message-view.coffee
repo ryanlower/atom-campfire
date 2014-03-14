@@ -8,3 +8,5 @@ class MessageView extends View
 
   initialize: (user, message) ->
     @body.html message.body
+    if message.type == 'PasteMessage'
+      @body.addClass 'paste'

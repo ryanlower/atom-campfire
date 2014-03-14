@@ -21,8 +21,8 @@ class RoomView extends View
     @room_info.html @room.name
 
   _addMessage: (message) ->
-    # Only show text messages for now
-    if message.type == 'TextMessage'
+    # Only show text and paste messages for now
+    if message.type == 'TextMessage' or message.type == 'PasteMessage'
       user = @room.getUser message.userId
 
       group = new MessageGroup(user)
